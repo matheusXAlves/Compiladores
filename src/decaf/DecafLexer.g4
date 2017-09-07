@@ -17,25 +17,27 @@ tokens
 LCURLY : '{';
 RCURLY : '}';
 
-ID  :
-  ('a'..'z' | 'A'..'Z')+;
+ID  : ('_' | 'a'..'z' | 'A'..'Z') ('_' | 'a'..'z' | 'A'..'Z' | [0..9]+)*;
 
-<<<<<<< HEAD
-PL_BOOLEAN : boolean;
-PL_BREAK : break;
-
-=======
->>>>>>> 7b1a6c28b3bf543c6edc59f9cac39a9c08125450
-WS_ : (' ' | '\n' |) -> skip;
+WS_ : (' ' | '\n' ) -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-CHAR : '\''  (ESC|~'\''| '\\t'|'\"'|'\\\\') '\'';
+ CHAR_LITERAL : '\'' ( ESC  | CHAR ) '\'' ;
+ 
+CHAR :	']'..'~' | '#'..'&' | '('..'[' | ' ' | '!'  ;
 STRING : '"' (ESC|~'"')* '"';
 
-<<<<<<< HEAD
-fragment ESC :  '\\' ('n'|'"');
-=======
+BOOL_WORDS:  'false' | 'true';
+IF:          'if'; 
+ELSE: 	     'else';
+FOR:  	     'for'; 
+CLASS: 	     'class'; 
+VOID:	     'void'; 
+RETURN:      'return';  
+CONTINUE:    'continue'; 
+BREAK: 	     'break';
+PROGRAM:     'Program';
+
 fragment
 ESC :  '\\' ('n'|'"');
->>>>>>> 7b1a6c28b3bf543c6edc59f9cac39a9c08125450

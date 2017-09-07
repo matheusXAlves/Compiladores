@@ -34,13 +34,14 @@ class Main {
 		        			case DecafLexer.ID:
 		        				type = " IDENTIFIER";
 		        				break;
-                                                case DecafLexer.CHAR:
-                                                        type = " CHARLITERAL";
+						case DecafLexer.CHAR_LITERAL:
+		        				type = " CHARLITERAL";
 		        				break;
-                                                case DecafLexer.WS_:
-                                                        type = " WHITESPACE";
-		        				break;
+						case DecafLexer.BOOL_WORDS:
+							type = " BOOLEAN";
+							break;
 		        			}
+						
 		        			System.out.println (token.getLine() + type + " " + text);
 		        		}
 		        		done = true;
