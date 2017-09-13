@@ -31,6 +31,9 @@ class Main {
 
 		        			switch (token.getType())
 		        			{
+						case DecafLexer.NUM_HEX:
+							type = " HEXLITERAL";
+							break;
 		        			case DecafLexer.ID:
 		        				type = " IDENTIFIER";
 		        				break;
@@ -38,8 +41,18 @@ class Main {
 		        				type = " CHARLITERAL";
 		        				break;
 						case DecafLexer.BOOL_WORDS:
-							type = " BOOLEAN";
+							type = " BOOLEANLITERAL";
 							break;
+						case DecafLexer.NUM_INT:
+							type = " INTLITERAL";
+					                break;
+						case DecafLexer.STRING:
+							type = " STRINGLITERAL";
+							break;
+						case DecafLexer.SL_COMMENT:
+							type = " COMMENTLITERAL";
+							break;
+						
 		        			}
 						
 		        			System.out.println (token.getLine() + type + " " + text);
