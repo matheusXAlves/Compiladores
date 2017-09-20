@@ -34,11 +34,14 @@ class Main {
 						case DecafLexer.NUM_HEX:
 							type = " HEXLITERAL";
 							break;
-		        			case DecafLexer.ID:
-		        				type = " IDENTIFIER";
-		        				break;
+						case DecafLexer.OPERADORES:
+							type = "";
+							break;
 						case DecafLexer.CHAR_LITERAL:
 		        				type = " CHARLITERAL";
+		        				break;
+		        			case DecafLexer.ID:
+		        				type = " IDENTIFIER";
 		        				break;
 						case DecafLexer.BOOL_WORDS:
 							type = " BOOLEANLITERAL";
