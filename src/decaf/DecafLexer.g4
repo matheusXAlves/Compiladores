@@ -17,18 +17,20 @@ tokens
 LCURLY : '{';
 RCURLY : '}';
 
-BOOL_WORDS:  'false' | 'true';
-IF:          'if'; 
-ELSE: 	     'else';
-FOR:  	     'for'; 
-CLASS: 	     'class'; 
-VOID:	     'void'; 
-RETURN:      'return';  
-CONTINUE:    'continue'; 
-BREAK: 	     'break';
-PROGRAM:     'Program';
+BOOL_WORDS:	'false' | 'true';
+PROGRAM: 	'Program';
+CLASS: 		'class'; 
+VOID:		'void';  
+FOR:  		'for';  
+RETURN: 	'return';  
+CONTINUE: 	'continue';  
+IF:             'if'; 
+ELSE: 		'else';
+BREAK: 		'break';
+CALLOUT: 	'callout';
+TYPE: 		'boolean' | 'int';
 
-
+RESERVWORD : 	TYPE | BREAK | CALLOUT | CLASS | CONTINUE | ELSE | FOR | RETURN | IF | VOID | BOOL_WORDS | CLASS | PROGRAM ;
 
 NUM_INT:     ('0'..'9')+ | NUM_HEX;
 NUM_HEX:     '0x'[a-fA-F0-9]+;
@@ -39,13 +41,14 @@ CHAR_LITERAL : '\'' ( ESC  | CHAR ) '\'' ;
  
 fragment CHAR :	']'..'~' | '#'..'&' | '('..'[' | ' ' | '!' | '\\t' | '\\\\' ;
 
-STRING : '"' (ESC|~'"')* '"';
+STRING : '"' (ESC | CHAR)* '"';
 
-ID  : ('_' | 'a'..'z' | 'A'..'Z') ('_' | 'a'..'z' | 'A'..'Z' | NUM_INT)+;
-
-WS_ : (' ' | '\n' ) -> skip;
+WS_ : (' ' | '\n' | '\r' | '\t' ) -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
+ID  : ('_' | LETRAS) ('_' | LETRAS | NUM_INT)+;
+fragment LETRAS : 'a'..'z' | 'A'..'Z' ;
+
 fragment
-ESC :  '\\' ('n'|'"');
+ESC :  '\\' ( 'r' | 'n' | 't' | '\'' | '"' | '\\' ) ;

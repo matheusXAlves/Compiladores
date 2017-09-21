@@ -24,7 +24,7 @@ class Main {
         		{
         			try
         			{
-		        		for (token=lexer.nextToken(); token.getType()!=Token.EOF; token=lexer.nextToken())
+		        		for (token=lexer.nextToken(); token.getType()!=Token.EOF; 						token=lexer.nextToken())
 		        		{
 		        			String type = "";
 		        			String text = token.getText();
@@ -37,11 +37,11 @@ class Main {
 						case DecafLexer.OPERADORES:
 							type = "";
 							break;
+						case DecafLexer.ID:
+		        				type = " IDENTIFIER";
+		        				break;
 						case DecafLexer.CHAR_LITERAL:
 		        				type = " CHARLITERAL";
-		        				break;
-		        			case DecafLexer.ID:
-		        				type = " IDENTIFIER";
 		        				break;
 						case DecafLexer.BOOL_WORDS:
 							type = " BOOLEANLITERAL";
@@ -49,12 +49,13 @@ class Main {
 						case DecafLexer.NUM_INT:
 							type = " INTLITERAL";
 					                break;
-						case DecafLexer.STRING:
-							type = " STRINGLITERAL";
-							break;
 						case DecafLexer.SL_COMMENT:
 							type = " COMMENTLITERAL";
 							break;
+						case DecafLexer.STRING:
+							type = " STRINGLITERAL";
+							break;
+						
 						
 		        			}
 						
