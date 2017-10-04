@@ -35,7 +35,9 @@ RESERVWORD : 	TYPE | BREAK | CALLOUT | CLASS | CONTINUE | ELSE | FOR | RETURN | 
 NUM_INT:     ('0'..'9')+ | NUM_HEX;
 NUM_HEX:     '0x'[a-fA-F0-9]+;
 
-OPERADORES: '<=' | '!=' | '==' | '<' | '>' | '>=' | '&&' | '||' | '+' | '*' | '/' | '%' | '-';
+OPERADORES: '!=' | '==' | '<' | '>' | '&&' | '||' | '+' | '*' 
+			| '/' | '%' | '-' | '<=' | '>='| '/=' 
+			| '+='| '-=' | '*=';
 
 CHAR_LITERAL : '\'' ( ESC  | CHAR ) '\'' ;
  
