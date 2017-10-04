@@ -16,6 +16,8 @@ tokens
 
 LCURLY : '{';
 RCURLY : '}';
+PL: '(';
+PR: ')';
 
 BOOL_WORDS:	'false' | 'true';
 PROGRAM: 	'Program';
