@@ -10,113 +10,48 @@ options
   tokenVocab=DecafLexer;
 }
 
-program: CLASS PROGRAM LCURLY field_decl* method_decl* RCURLY;
+program: CLASS PROGRAM LCURLY (field_decl)* (method_decl)* RCURLY EOF ;
 
-field_decl:  type id (',' type id)*  | type id '[' int_literal ']' (',' type id '[' int_literal ']')* ';';
+field_decl:  ( TYPE ID (VIRGULA TYPE ID )? PONTO_VIRGULA | TYPE ID '[' INT_LITERAL ']' (VIRGULA ID CL INT_LITERAL CR )? PONTO_VIRGULA );
 
-method_decl: (type void) id PL |(type id)+,|PR block;
+method_decl: (TYPE | VOID) ID PL (TYPE ID ( VIRGULA TYPE ID)*)? PR block ; 
 
-block: LCURLY var_decl* statement* RCURLY;
+block: LCURLY (var_decl)* (statement)* RCURLY ;
 
-var_decl: type id(',' id)*';';
+var_decl: TYPE ID (VIRGULA ID)* PONT_VIRGULA ;
 
-type: NUM_INT | BOOL_WORDS;
+statement:       location (OPERADOR_IGUAL|OPERADOR_ASSING ) expr PONT_V
+		
+ 		| method_call PONTO_VIRGULA
 
-statement: location assign_op expr ';'
-           | method_call';'
-           | IF (expr) block ( ELSE block)? 
-           | FOR (id expr ';' expr ';' block)
-           | RETURN (expr)?';'
-           | BREAK';'
-           | CONTINUE';'
-           | block;
+		| IF PL expr PR block (ELSE block)?
+		
+		| FOR  ID OPERADOR_IGUAL expr VIRGULA expr
+	
+		| RETURN  (expr)? PONTO_VIRGULA
 
-assign_op: '='
-           |'+='
-           |'-=';
+		| BREAK PONTO_VIRGULA
 
-method_call: method_name (expr (',' expr)*)? 
-            |CALLOUT (string_literal (',' callout_arg (',' callout_arg)*)?);
+		| CONTINUE PONTO_VIRGULA
+	
+		| block ;
 
-method_name: id;
+method_call:  method_name  PL   ( expr (VIRGULA expr)* )? PR 
+		| CALLOUT PL STRING (VIRGULA callout_arg (VIRGULA callout_arg)*)? PR ;
 
-location: id 
-         | id '|' expr '|';
+method_name: ID ;
 
-expr: location
-      | method_call
-      | literal
-      | expr bin_op expr
-      | - expr
-      | ! expr
-      | (expr);
+location: ID | ID CL expr CR ;
 
-callout_arg: expr | string_literal;
+expr:   location
+	| method_call
+	| literal
+        | expr (OPERADOR_BIN|OPERADOR_MENOS) expr
+	| OPERADOR_MENOS  expr
+	| EXCLAMA expr
+	| PL expr PR ;
 
-bin_op: arith_op | rel_op | eq_op | cond_op;
-
-arith_op: '+'|'-'|'*'|'/'|'%';
-
-rel_op: '/' | '=/';
-
-eq_op: '=='| '!=';
-
-cond_op: '&&'| '||';
-
-literal: int_literal| char_literal| bool_literal;
-
-id: alpha | alpha_num*;
-
-alpha_num: alpha | digit;
-
-alpha: fragment LETRAS;
-
-digit: NUM_INT;
-
-hex_digit: NUM_HEX;
-
-int_literal: decimal_literal | hex_literal;
-
-decimal_literal: digit digit*;
-
-hex_literal: 0x hex_digit hex_digit*;
-
-bool_literal: BOOL_WORDS;
-
-char_literal: CHAR_LITERAL;
-
-string_literal: STRING;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+callout_arg: expr | STRING ;
+ 
+literal: CHAR_LITERAL | BOOL_WORDS | NUM_INT;
 

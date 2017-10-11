@@ -14,10 +14,18 @@ tokens
   TK_class
 }
 
-LCURLY : '{';
-RCURLY : '}';
-PL: '(';
-PR: ')';
+WS_ : (' ' | '\n' | '\r' | '\t' ) -> skip;
+
+SL_COMMENT : '//' (~'\n')* '\n' -> skip;
+
+PL: 			'(' ;          
+PR: 			')' ;
+LCURLY : 		'{' ;
+RCURLY : 		'}' ; 
+CL: 			'[' ;
+CR: 			']' ;
+PONTO_VIRGULA: 		';' ;
+VIRGULA:  		',' ; 
 
 BOOL_WORDS:	'false' | 'true';
 PROGRAM: 	'Program';
@@ -40,19 +48,18 @@ NUM_HEX:     '0x'[a-fA-F0-9]+;
 OPERADORES: '!=' | '==' | '<' | '>' | '&&' | '||' | '+' | '*' 
 			| '/' | '%' | '-' | '<=' | '>='| '/=' 
 			| '+='| '-=' | '*=';
+OPERADOR_BIN: '<=' | '>='| '!=' | '==';
+OPERADOR_IGUAL: '=';
+OPERADOR_MENOS: '-';
+OPERADOR_ASSING: '/=' | '+='| '-=' | '*=';
 
 CHAR_LITERAL : '\'' ( ESC  | CHAR ) '\'' ;
  
-fragment CHAR :	']'..'~' | '#'..'&' | '('..'[' | ' ' | '!' | '\\t' | '\\\\' ;
+CHAR :	']'..'~' | '#'..'&' | '('..'[' | ' ' | '!' | '\\t' | '\\\\' ;
 
 STRING : '"' (ESC | CHAR)* '"';
 
-WS_ : (' ' | '\n' | '\r' | '\t' ) -> skip;
-
-SL_COMMENT : '//' (~'\n')* '\n' -> skip;
-
 ID  : ('_' | LETRAS) ('_' | LETRAS | NUM_INT)+;
-fragment LETRAS : 'a'..'z' | 'A'..'Z' ;
+LETRAS : 'a'..'z' | 'A'..'Z' ;
 
-fragment
 ESC :  '\\' ( 'r' | 'n' | 't' | '\'' | '"' | '\\' ) ;
