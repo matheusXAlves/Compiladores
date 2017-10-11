@@ -18,6 +18,8 @@ LCURLY : '{';
 RCURLY : '}';
 PL: '(';
 PR: ')';
+CR: '[';
+CL: ']';
 
 BOOL_WORDS:	'false' | 'true';
 PROGRAM: 	'Program';
@@ -40,6 +42,9 @@ NUM_HEX:     '0x'[a-fA-F0-9]+;
 OPERADORES: '!=' | '==' | '<' | '>' | '&&' | '||' | '+' | '*' 
 			| '/' | '%' | '-' | '<=' | '>='| '/=' 
 			| '+='| '-=' | '*=';
+
+PONT_VIRGULA: ';' ;
+VIRGULA: ',' ;
 
 CHAR_LITERAL : '\'' ( ESC  | CHAR ) '\'' ;
  
