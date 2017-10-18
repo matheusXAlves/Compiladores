@@ -18,13 +18,16 @@ WS_ : (' ' | '\n' | '\r' | '\t' ) -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
+NUM_INT:     ('0'..'9')+ | NUM_HEX;
+NUM_HEX:     '0x'[a-fA-F0-9]+;
+
+PONTO_VIRGULA: 		';' ;
 PL: 			'(' ;          
 PR: 			')' ;
 LCURLY : 		'{' ;
 RCURLY : 		'}' ; 
 CL: 			'[' ;
 CR: 			']' ;
-PONTO_VIRGULA: 		';' ;
 VIRGULA:  		',' ; 
 
 BOOL_WORDS:	'false' | 'true';
@@ -38,12 +41,9 @@ IF:             'if';
 ELSE: 		'else';
 BREAK: 		'break';
 CALLOUT: 	'callout';
-TYPE: 		'boolean' | 'int';
+INT:		'int';
+BOOLEAN:	'boolean';
 
-RESERVWORD : 	TYPE | BREAK | CALLOUT | CLASS | CONTINUE | ELSE | FOR | RETURN | IF | VOID | BOOL_WORDS | CLASS | PROGRAM ;
-
-NUM_INT:     ('0'..'9')+ | NUM_HEX;
-NUM_HEX:     '0x'[a-fA-F0-9]+;
 
 OPERADORES: '!=' | '==' | '<' | '>' | '&&' | '||' | '+' | '*' 
 			| '/' | '%' | '-' | '<=' | '>='| '/=' 
@@ -55,11 +55,12 @@ OPERADOR_ASSING: '/=' | '+='| '-=' | '*=';
 
 CHAR_LITERAL : '\'' ( ESC  | CHAR ) '\'' ;
  
-CHAR :	']'..'~' | '#'..'&' | '('..'[' | ' ' | '!' | '\\t' | '\\\\' ;
+fragment CHAR :	']'..'~' | '#'..'&' | '('..'[' | ' ' | '!' | '\\t' | '\\\\' ;
 
 STRING : '"' (ESC | CHAR)* '"';
 
-ID  : ('_' | LETRAS) ('_' | LETRAS | NUM_INT)+;
-LETRAS : 'a'..'z' | 'A'..'Z' ;
+ID  : (('_' | 'a'..'z' | 'A'..'Z' ) | ('_' | 'a'..'z' | 'A'..'Z'  | NUM_INT))+;
 
-ESC :  '\\' ( 'r' | 'n' | 't' | '\'' | '"' | '\\' ) ;
+fragment LETRAS : 'a'..'z' | 'A'..'Z' ;
+
+fragment ESC :  '\\' ( 'r' | 'n' | 't' | '\'' | '"' | '\\' ) ;

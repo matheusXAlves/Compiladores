@@ -10,25 +10,29 @@ options
   tokenVocab=DecafLexer;
 }
 
-program: CLASS PROGRAM LCURLY (field_decl)* (method_decl)* RCURLY EOF ;
+program: CLASS PROGRAM LCURLY field_decl* method_decl* RCURLY EOF;
 
-field_decl:  ( TYPE ID (VIRGULA TYPE ID )? PONTO_VIRGULA | TYPE ID '[' INT_LITERAL ']' (VIRGULA ID CL INT_LITERAL CR )? PONTO_VIRGULA );
+type: BOOLEAN | INT;
 
-method_decl: (TYPE | VOID) ID PL (TYPE ID ( VIRGULA TYPE ID)*)? PR block ; 
+field_decl:  type ID ((VIRGULA type ID)* | type ID CL NUM_INT CR (VIRGULA type ID CL NUM_INT CR)*) PONTO_VIRGULA ;
+
+
+
+method_decl: (type | VOID) ID PL (type ID ( VIRGULA type ID)*)? PR block ; 
 
 block: LCURLY (var_decl)* (statement)* RCURLY ;
 
-var_decl: TYPE ID (VIRGULA ID)* PONT_VIRGULA ;
+var_decl: type ID (VIRGULA ID)* PONTO_VIRGULA ;
 
-statement:       location (OPERADOR_IGUAL|OPERADOR_ASSING ) expr PONT_V
+statement:       location (OPERADOR_IGUAL|OPERADOR_ASSING ) expr PONTO_VIRGULA
 		
  		| method_call PONTO_VIRGULA
 
-		| IF PL expr PR block (ELSE block)?
+		| IF PL expr PR block (ELSE block)
 		
 		| FOR  ID OPERADOR_IGUAL expr VIRGULA expr
 	
-		| RETURN  (expr)? PONTO_VIRGULA
+		| RETURN  (expr)+ PONTO_VIRGULA
 
 		| BREAK PONTO_VIRGULA
 
@@ -36,8 +40,8 @@ statement:       location (OPERADOR_IGUAL|OPERADOR_ASSING ) expr PONT_V
 	
 		| block ;
 
-method_call:  method_name  PL   ( expr (VIRGULA expr)* )? PR 
-		| CALLOUT PL STRING (VIRGULA callout_arg (VIRGULA callout_arg)*)? PR ;
+method_call:  method_name  PL   ( expr (VIRGULA expr)* )* PR 
+		| CALLOUT PL STRING (VIRGULA callout_arg (VIRGULA callout_arg)*)+ PR ;
 
 method_name: ID ;
 
