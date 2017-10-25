@@ -18,6 +18,8 @@ WS_ : (' ' | '\n' | '\r' | '\t' ) -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
+EXCLAMA: '!' ;
+
 NUM_INT:     ('0'..'9')+ | NUM_HEX;
 NUM_HEX:     '0x'[a-fA-F0-9]+;
 
@@ -45,13 +47,15 @@ INT:		'int';
 BOOLEAN:	'boolean';
 
 
-OPERADORES: '!=' | '==' | '<' | '>' | '&&' | '||' | '+' | '*' 
-			| '/' | '%' | '-' | '<=' | '>='| '/=' 
-			| '+='| '-=' | '*=';
-OPERADOR_BIN: '<=' | '>='| '!=' | '==';
+
+OPERADOR_BIN: '<=' | '>='| '!=' | '==' | '<' | '>' | '+' | '/' | '-' | '*' ;
 OPERADOR_IGUAL: '=';
 OPERADOR_MENOS: '-';
 OPERADOR_ASSING: '/=' | '+='| '-=' | '*=';
+
+OPERADORES: '!=' | '==' | '<' | '>' | '&&' | '||' | '+' | '*' 
+			| '/' | '%' | '-' | '<=' | '>='| '/=' 
+			| '+='| '-=' | '*=';
 
 CHAR_LITERAL : '\'' ( ESC  | CHAR ) '\'' ;
  

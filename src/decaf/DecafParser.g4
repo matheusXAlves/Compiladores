@@ -14,7 +14,7 @@ program: CLASS PROGRAM LCURLY field_decl* method_decl* RCURLY EOF;
 
 type: BOOLEAN | INT;
 
-field_decl:  type ID ((VIRGULA type ID)* | type ID CL NUM_INT CR (VIRGULA type ID CL NUM_INT CR)*) PONTO_VIRGULA ;
+field_decl:  (type ID (VIRGULA type ID)* | type ID CL NUM_INT CR (VIRGULA type ID CL NUM_INT CR)*)* PONTO_VIRGULA ;
 
 
 
@@ -28,7 +28,7 @@ statement:       location (OPERADOR_IGUAL|OPERADOR_ASSING ) expr PONTO_VIRGULA
 		
  		| method_call PONTO_VIRGULA
 
-		| IF PL expr PR block (ELSE block)
+		| IF PL expr PR block (ELSE block)?
 		
 		| FOR  ID OPERADOR_IGUAL expr VIRGULA expr
 	
@@ -51,7 +51,7 @@ expr:   location
 	| method_call
 	| literal
         | expr (OPERADOR_BIN|OPERADOR_MENOS) expr
-	| OPERADOR_MENOS  expr
+	| (OPERADOR_BIN|OPERADOR_MENOS) expr
 	| EXCLAMA expr
 	| PL expr PR ;
 
