@@ -17,7 +17,6 @@ type: BOOLEAN | INT;
 field_decl:  (type ID (VIRGULA type ID)* | type ID CL NUM_INT CR (VIRGULA type ID CL NUM_INT CR)*)* PONTO_VIRGULA ;
 
 
-
 method_decl: (type | VOID) ID PL (type ID ( VIRGULA type ID)*)? PR block ; 
 
 block: LCURLY (var_decl)* (statement)* RCURLY ;
