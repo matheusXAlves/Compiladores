@@ -40,7 +40,7 @@ statement:       location (OPERADOR_IGUAL|OPERADOR_ASSING ) expr PONTO_VIRGULA
 		| block ;
 
 method_call:  method_name  PL   ( expr (VIRGULA expr)* )* PR 
-		| CALLOUT PL STRING (VIRGULA callout_arg (VIRGULA callout_arg)*)+ PR ;
+		| CALLOUT PL STRING (VIRGULA callout_arg (VIRGULA callout_arg)*)* PR ;
 
 method_name: ID ;
 

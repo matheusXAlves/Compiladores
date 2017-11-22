@@ -33,12 +33,12 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
     @Override
     public void enterMethod_decl(DecafParser.Method_declContext ctx) {
         String name = ctx.ID().get(0).getText();
-        //int typeTokenType = ctx.type().start.getType();
-        //DecafSymbol.Type type = this.getType(typeTokenType);
+        int typeTokenType = ctx.type().get(0).start.getType();
+        DecafSymbol.Type type = this.getType(typeTokenType);
 
         // push new scope by making new one that points to enclosing scope
         FunctionSymbol function = new FunctionSymbol(name);
-        // function.setType(type); // Set symbol type
+        //function.setType(type); // Set symbol type
 
         currentScope.define(function); // Define function in current scope
         saveScope(ctx, function);
@@ -134,7 +134,106 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
             case DecafParser.NUM_INT :   return DecafSymbol.Type.tINT;
         }
         return DecafSymbol.Type.tINVALID;
-    }
+     }
+	@Override 
+	public void enterVar_decl(DecafParser.Var_declContext ctx) {
+		
+	}
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVar_decl(DecafParser.Var_declContext ctx) {
+	
+
+	}
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatement(DecafParser.StatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatement(DecafParser.StatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMethod_call(DecafParser.Method_callContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethod_call(DecafParser.Method_callContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMethod_name(DecafParser.Method_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethod_name(DecafParser.Method_nameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLocation(DecafParser.LocationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLocation(DecafParser.LocationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpr(DecafParser.ExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpr(DecafParser.ExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCallout_arg(DecafParser.Callout_argContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCallout_arg(DecafParser.Callout_argContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLiteral(DecafParser.LiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLiteral(DecafParser.LiteralContext ctx) { }
+
+	
 
 
 }

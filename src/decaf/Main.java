@@ -24,8 +24,7 @@ class Main {
 
         	InputStream inputStream = args.length == 0 ?
                     System.in : new java.io.FileInputStream(CLI.infile);
-
-        	if (CLI.target == CLI.SCAN)
+		if (CLI.target == CLI.SCAN)
         	{
         		DecafLexer lexer = new DecafLexer(new ANTLRInputStream(inputStream));
         		Token token;
@@ -69,8 +68,8 @@ class Main {
         	            lexer.skip();
         	        }
         		}
-        	}
-			else if (CLI.target == CLI.PARSE || CLI.target == CLI.DEFAULT)
+		}
+		else if (CLI.target == CLI.PARSE || CLI.target == CLI.DEFAULT)
 			{
 				// Primeiro faz o parsing da cadeia
 				DecafLexer lexer = new DecafLexer(new ANTLRInputStream(inputStream));
@@ -102,7 +101,9 @@ class Main {
 				}
 
 
-			} else if (CLI.target == CLI.INTER) {
+		}
+
+        	 else if (CLI.target == CLI.INTER) {
 				// Primeiro faz o parsing da cadeia
 				DecafLexer lexer = new DecafLexer(new ANTLRInputStream(inputStream));
 				CommonTokenStream tokens = new CommonTokenStream(lexer);
